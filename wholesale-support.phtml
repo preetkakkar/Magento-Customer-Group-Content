@@ -1,0 +1,34 @@
+
+<?php
+// Get the current customer session
+  $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+  $customerSession = $objectManager->create('Magento\Customer\Model\Session');//
+
+// Check if the customer is logged in
+  if ($customerSession->isLoggedIn()) {
+  // Get the logged-in customer's group ID
+	  $c_grp_id = $customerSession->getCustomer()->getGroupId(); //get current group id information
+
+	// Specify the ID of the "Wholesale" customer group		
+	if($c_grp_id == 4){  // Replace '4' with the actual ID of your "Wholesale" customer group
+
+?>
+
+<!-- Content visible only to Wholesale customers --->
+
+ 	<div class="wholesale-content">
+		<h2>Welcome Wholesale Customers!</h2>
+        <p>Exclusive content for wholesale customers goes here.</p>
+    </div>
+
+
+
+<?php 
+	} 
+  }
+else {
+	echo "<h2>Restricted Access Area</h1>";
+	echo "<p>This content is not available for your account type.</p>";
+} 
+
+?>
